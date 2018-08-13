@@ -1,0 +1,21 @@
+<html>
+<head>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <link rel="stylesheet" href="https://unpkg.com/font-awesome@latest/css/font-awesome.min.css" />
+  <script src="dist/vue-clap.min.js"></script>
+</head>
+<body>
+  <div id="preview"></div>
+  <script>
+    new Vue({
+      el: '#preview',
+      template: '<div><vue-clap icon-class="fa fa-hand-paper-o" @clap="clap" /></div>',
+      methods: {
+        clap (claps) {
+          console.log('clap: ', claps)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
