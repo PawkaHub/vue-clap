@@ -71,13 +71,13 @@
 <script>
 export default {
   name: 'VueClap',
-  props: [
-    'iconClass',
+  props: {
+    iconClass: String,
     initialTotal: {
         type: Number,
         default: 0,
     },
-],
+  },
   data () {
     return {
       accCounter: 0,
