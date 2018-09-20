@@ -71,11 +71,17 @@
 <script>
 export default {
   name: 'VueClap',
-  props: ['iconClass'],
+  props: [
+    'iconClass',
+    totalCount: {
+        type: Number,
+        default: 0,
+    },
+],
   data () {
     return {
       accCounter: 0,
-      totalCount: 0,
+      totalCount: this.totalCount,
       minDeg: 1,
       maxDeg: 72,
       particlesClasses: [
