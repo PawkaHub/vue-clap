@@ -79,7 +79,7 @@
     name: 'VueClap',
     props: {
       iconClass: String,
-      initialTotal: {
+      totalCount: {
           type: Number,
           default: 0,
       },
@@ -87,7 +87,6 @@
     data: function data () {
       return {
         accCounter: 0,
-        totalCount: this.initialTotal,
         minDeg: 1,
         maxDeg: 72,
         particlesClasses: [
@@ -116,7 +115,7 @@
       	this.accCounter ++;
       	clickCounter.children[0].innerText = '+' + this.accCounter;
           totalClickCounter.innerText = this.totalCount + this.accCounter;
-          this.totalCount++;
+          // this.totalCount++
 
           if (clickCounter.classList.contains('first-active')) {
       		this.runAnimationCycle(clickCounter, 'active');
