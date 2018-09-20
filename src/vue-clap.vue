@@ -73,7 +73,7 @@ export default {
   name: 'VueClap',
   props: [
     'iconClass',
-    totalCount: {
+    initialTotal: {
         type: Number,
         default: 0,
     },
@@ -81,7 +81,7 @@ export default {
   data () {
     return {
       accCounter: 0,
-      totalCount: this.totalCount,
+      totalCount: this.initialTotal,
       minDeg: 1,
       maxDeg: 72,
       particlesClasses: [
