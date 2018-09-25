@@ -1,6 +1,8 @@
 <template>
   <div class="canvas">
-    <div id="totalCounter" ref="totalClickCounter" class="total-counter">{{totalCount}}</div>
+    <div id="totalCounter" ref="totalClickCounter" class="total-counter">
+        {{displayTotal}}
+    </div>
 
     <div id="clap" class="clap-container">
         <i class="clap-icon" :class="iconClass"></i>
@@ -78,6 +80,11 @@ export default {
         default: 0,
     },
   },
+  computed: {
+    displayTotal() {
+        return this.format(this.totalCount);
+    },
+  },
   data () {
     return {
       accCounter: 0,
@@ -103,6 +110,15 @@ export default {
     }
   },
   methods: {
+    round(n, precision) {
+      const prec = Math.pow(10, precision);
+      return Math.round(n * prec) / prec;
+    },
+    format(n) {
+      const base = Math.floor(Math.log( Math.abs(n)) / Math.log(1000));
+      const suffix = 'kmb'[base - 1];
+      return suffix ? this.round(n / Math.pow(1000, base), 1) + suffix : '' +n;
+    },
     upClickCounter() {
         const clickCounter = this.$refs.clicker // document.getElementById("clicker");
         const totalClickCounter = this.$refs.totalClickCounter // document.getElementById('totalCounter');

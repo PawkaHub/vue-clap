@@ -75,13 +75,20 @@
 
 
 
-  var component = {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"canvas"},[_c('div',{ref:"totalClickCounter",staticClass:"total-counter",attrs:{"id":"totalCounter"}},[_vm._v(_vm._s(_vm.totalCount))]),_vm._v(" "),_c('div',{staticClass:"clap-container",attrs:{"id":"clap"}},[_c('i',{staticClass:"clap-icon",class:_vm.iconClass})]),_vm._v(" "),_c('div',{ref:"clicker",staticClass:"click-counter",attrs:{"id":"clicker"}},[_c('span',{staticClass:"counter"})]),_vm._v(" "),_c('div',{staticClass:"clap-container-sonar",attrs:{"id":"sonar-clap"}}),_vm._v(" "),_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_vm._m(2)])},staticRenderFns: [function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"particles-container",attrs:{"id":"particles"}},[_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})])])},function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"particles-container",attrs:{"id":"particles-2"}},[_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})])])},function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"particles-container",attrs:{"id":"particles-3"}},[_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})])])}],
+
+
+  var component = {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"canvas"},[_c('div',{ref:"totalClickCounter",staticClass:"total-counter",attrs:{"id":"totalCounter"}},[_vm._v(" "+_vm._s(_vm.displayTotal)+" ")]),_vm._v(" "),_c('div',{staticClass:"clap-container",attrs:{"id":"clap"}},[_c('i',{staticClass:"clap-icon",class:_vm.iconClass})]),_vm._v(" "),_c('div',{ref:"clicker",staticClass:"click-counter",attrs:{"id":"clicker"}},[_c('span',{staticClass:"counter"})]),_vm._v(" "),_c('div',{staticClass:"clap-container-sonar",attrs:{"id":"sonar-clap"}}),_vm._v(" "),_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_vm._m(2)])},staticRenderFns: [function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"particles-container",attrs:{"id":"particles"}},[_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})])])},function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"particles-container",attrs:{"id":"particles-2"}},[_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})])])},function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"particles-container",attrs:{"id":"particles-3"}},[_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})]),_vm._v(" "),_c('div',{staticClass:"triangle"},[_c('div',{staticClass:"square"})])])}],
     name: 'VueClap',
     props: {
       iconClass: String,
       totalCount: {
           type: Number,
           default: 0,
+      },
+    },
+    computed: {
+      displayTotal: function displayTotal() {
+          return this.format(this.totalCount);
       },
     },
     data: function data () {
@@ -108,6 +115,15 @@
       }
     },
     methods: {
+      round: function round(n, precision) {
+        var prec = Math.pow(10, precision);
+        return Math.round(n * prec) / prec;
+      },
+      format: function format(n) {
+        var base = Math.floor(Math.log( Math.abs(n)) / Math.log(1000));
+        var suffix = 'kmb'[base - 1];
+        return suffix ? this.round(n / Math.pow(1000, base), 1) + suffix : '' +n;
+      },
       upClickCounter: function upClickCounter() {
           var clickCounter = this.$refs.clicker; // document.getElementById("clicker");
           var totalClickCounter = this.$refs.totalClickCounter; // document.getElementById('totalCounter');
