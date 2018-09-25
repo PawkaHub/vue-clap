@@ -130,7 +130,7 @@
 
       	this.accCounter ++;
       	clickCounter.children[0].innerText = '+' + this.accCounter;
-          totalClickCounter.innerText = this.totalCount + this.accCounter;
+          totalClickCounter.innerText = this.format(this.totalCount + this.accCounter);
           // this.totalCount++
 
           if (clickCounter.classList.contains('first-active')) {
